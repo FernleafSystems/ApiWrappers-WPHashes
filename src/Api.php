@@ -10,6 +10,13 @@ class Api extends BaseApi {
 	const REQUEST_METHOD = 'get';
 
 	/**
+	 * @return Connection
+	 */
+	public function getDefaultConnection() {
+		return new Connection();
+	}
+
+	/**
 	 * @return HashesVO
 	 */
 	public function getVO() {

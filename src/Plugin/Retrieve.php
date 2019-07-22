@@ -6,12 +6,14 @@ use FernleafSystems\ApiWrappers\WpHashes;
 
 class Retrieve extends WpHashes\Common\BaseRetrieve {
 
+	const TYPE = 'plugin';
+
 	/**
-	 * @param $sSlug
+	 * @param string $sSlug
 	 * @return $this
 	 */
 	public function setSlug( $sSlug ) {
-		return $this->setRequestDataItem( 'slug', $sSlug );
+		return $this->setRequestDataItem( 'slug', strtolower( $sSlug ) );
 	}
 
 	/**

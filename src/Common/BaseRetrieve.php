@@ -6,28 +6,35 @@ use FernleafSystems\ApiWrappers\WpHashes;
 
 class BaseRetrieve extends WpHashes\Api {
 
+	const TYPE = '';
+
+	public function __construct( $oConnection = null ) {
+		parent::__construct( $oConnection );
+		$this->setType( static::TYPE );
+	}
+
 	/**
-	 * @param $sType
+	 * @param string $sType
 	 * @return $this
 	 */
 	public function setType( $sType ) {
-		return $this->setRequestDataItem( 'type', $sType );
+		return $this->setRequestDataItem( 'type', strtolower( $sType ) );
 	}
 
 	/**
-	 * @param $sHash
+	 * @param string $sHash
 	 * @return $this
 	 */
 	public function setHashAlgo( $sHash ) {
-		return $this->setRequestDataItem( 'hash', $sHash );
+		return $this->setRequestDataItem( 'hash', strtolower( $sHash ) );
 	}
 
 	/**
-	 * @param $sHash
+	 * @param string $sVersion
 	 * @return $this
 	 */
-	public function setVersion( $sHash ) {
-		return $this->setRequestDataItem( 'version', $sHash );
+	public function setVersion( $sVersion ) {
+		return $this->setRequestDataItem( 'version', strtolower( $sVersion ) );
 	}
 
 	/**
