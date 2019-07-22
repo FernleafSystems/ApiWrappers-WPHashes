@@ -11,7 +11,7 @@ class BaseRetrieve extends WpHashes\Api {
 	 * @return $this
 	 */
 	public function setType( $sType ) {
-		return $this->setRequestDataItem( 'type', $sType );
+		return $this->setRequestDataItem( 'type', strtolower( $sType ) );
 	}
 
 	/**
@@ -19,15 +19,15 @@ class BaseRetrieve extends WpHashes\Api {
 	 * @return $this
 	 */
 	public function setHashAlgo( $sHash ) {
-		return $this->setRequestDataItem( 'hash', $sHash );
+		return $this->setRequestDataItem( 'hash', strtolower( $sHash ) );
 	}
 
 	/**
-	 * @param $sHash
+	 * @param $sVersion
 	 * @return $this
 	 */
-	public function setVersion( $sHash ) {
-		return $this->setRequestDataItem( 'version', $sHash );
+	public function setVersion( $sVersion ) {
+		return $this->setRequestDataItem( 'version', strtolower( $sVersion ) );
 	}
 
 	/**

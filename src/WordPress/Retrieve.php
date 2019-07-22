@@ -6,12 +6,16 @@ use FernleafSystems\ApiWrappers\WpHashes;
 
 class Retrieve extends WpHashes\Common\BaseRetrieve {
 
+	protected function preFlight() {
+		$this->setType( 'wordpress' );
+	}
+
 	/**
-	 * @param $sLocale
+	 * @param string $sLocale
 	 * @return $this
 	 */
 	public function setLocale( $sLocale ) {
-		return $this->setRequestDataItem( 'locale', $sLocale );
+		return $this->setRequestDataItem( 'locale', strtolower( $sLocale ) );
 	}
 
 	/**
