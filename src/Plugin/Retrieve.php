@@ -6,12 +6,10 @@ use FernleafSystems\ApiWrappers\WpHashes;
 
 class Retrieve extends WpHashes\Common\BaseRetrieve {
 
-	protected function preFlight() {
-		$this->setType( 'plugin' );
-	}
+	const TYPE = 'plugin';
 
 	/**
-	 * @param $sSlug
+	 * @param string $sSlug
 	 * @return $this
 	 */
 	public function setSlug( $sSlug ) {

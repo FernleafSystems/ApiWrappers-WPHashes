@@ -6,8 +6,15 @@ use FernleafSystems\ApiWrappers\WpHashes;
 
 class BaseRetrieve extends WpHashes\Api {
 
+	const TYPE = '';
+
+	public function __construct( $oConnection = null ) {
+		parent::__construct( $oConnection );
+		$this->setType( static::TYPE );
+	}
+
 	/**
-	 * @param $sType
+	 * @param string $sType
 	 * @return $this
 	 */
 	public function setType( $sType ) {
@@ -15,7 +22,7 @@ class BaseRetrieve extends WpHashes\Api {
 	}
 
 	/**
-	 * @param $sHash
+	 * @param string $sHash
 	 * @return $this
 	 */
 	public function setHashAlgo( $sHash ) {
@@ -23,7 +30,7 @@ class BaseRetrieve extends WpHashes\Api {
 	}
 
 	/**
-	 * @param $sVersion
+	 * @param string $sVersion
 	 * @return $this
 	 */
 	public function setVersion( $sVersion ) {

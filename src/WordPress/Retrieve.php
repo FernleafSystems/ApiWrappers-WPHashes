@@ -6,9 +6,7 @@ use FernleafSystems\ApiWrappers\WpHashes;
 
 class Retrieve extends WpHashes\Common\BaseRetrieve {
 
-	protected function preFlight() {
-		$this->setType( 'wordpress' );
-	}
+	const TYPE = 'wordpress';
 
 	/**
 	 * @param string $sLocale
