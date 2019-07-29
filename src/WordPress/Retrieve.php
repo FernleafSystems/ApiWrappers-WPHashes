@@ -6,7 +6,7 @@ use FernleafSystems\ApiWrappers\WpHashes;
 
 class Retrieve extends WpHashes\Common\BaseRetrieve {
 
-	const TYPE = 'wordpress';
+	const ENDPOINT_KEY = 'wordpress';
 
 	/**
 	 * @param string $sLocale
@@ -20,8 +20,8 @@ class Retrieve extends WpHashes\Common\BaseRetrieve {
 	 * @return string[]
 	 */
 	protected function getCriticalRequestItems() {
-		$aParent = parent::getCriticalRequestItems();
-		$aParent[] = 'locale';
-		return $aParent;
+		$aItems = parent::getCriticalRequestItems();
+		$aItems[] = 'locale';
+		return $aItems;
 	}
 }

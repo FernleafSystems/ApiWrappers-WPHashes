@@ -6,5 +6,5 @@ use FernleafSystems\ApiWrappers\WpHashes;
 
 class Retrieve extends WpHashes\Common\BaseRetrieve {
 
-	const TYPE = 'classicpress';
+	const ENDPOINT_KEY = 'classicpress';
 }

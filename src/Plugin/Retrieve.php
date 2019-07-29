@@ -6,7 +6,7 @@ use FernleafSystems\ApiWrappers\WpHashes;
 
 class Retrieve extends WpHashes\Common\BaseRetrieve {
 
-	const TYPE = 'plugin';
+	const ENDPOINT_KEY = 'plugin';
 
 	/**
 	 * @param string $sSlug
@@ -20,8 +20,8 @@ class Retrieve extends WpHashes\Common\BaseRetrieve {
 	 * @return string[]
 	 */
 	protected function getCriticalRequestItems() {
-		$aParent = parent::getCriticalRequestItems();
-		$aParent[] = 'slug';
-		return $aParent;
+		$aItems = parent::getCriticalRequestItems();
+		$aItems[] = 'slug';
+		return $aItems;
 	}
 }

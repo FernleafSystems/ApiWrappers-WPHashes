@@ -8,12 +8,5 @@ namespace FernleafSystems\ApiWrappers\WpHashes;
  */
 class Connection extends \FernleafSystems\ApiWrappers\Base\Connection {
 
-	const API_URL = 'https://wphashes.com/api';
-
-	/**
-	 * @return string
-	 */
-	public function getBaseUrl() {
-		return static::API_URL;
-	}
+	const API_URL = 'https://wphashes.com/api/apto-wphashes/v%s';
 }
