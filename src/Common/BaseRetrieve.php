@@ -6,11 +6,11 @@ use FernleafSystems\ApiWrappers\WpHashes;
 
 class BaseRetrieve extends WpHashes\Api {
 
-	const TYPE = '';
+	const ENDPOINT_KEY = '';
 
 	public function __construct( $oConnection = null ) {
 		parent::__construct( $oConnection );
-		$this->setType( static::TYPE );
+		$this->setType( static::ENDPOINT_KEY );
 	}
 
 	/**
@@ -42,5 +42,12 @@ class BaseRetrieve extends WpHashes\Api {
 	 */
 	protected function getCriticalRequestItems() {
 		return [ 'type', 'version', 'hash' ];
+	}
+
+	/**
+	 * @return string
+	 */
+	protected function getUrlEndpoint() {
+		return sprintf( static::ENDPOINT_KEY );
 	}
 }
