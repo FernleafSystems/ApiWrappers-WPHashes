@@ -48,6 +48,6 @@ class BaseRetrieve extends WpHashes\Api {
 	 * @return string
 	 */
 	protected function getUrlEndpoint() {
-		return sprintf( static::ENDPOINT_KEY );
+		return static::ENDPOINT_KEY;
 	}
 }
