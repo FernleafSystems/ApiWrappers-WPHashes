@@ -25,7 +25,7 @@ abstract class BaseRetrieve extends WpHashes\Api {
 		$aVulns = [];
 		if ( $this->req()->isLastRequestSuccess() ) {
 			$aData = $this->getDecodedResponseBody();
-			if ( is_array( $aData[ 'vulnerabilities' ] ) ) {
+			if ( isset( $aData[ 'vulnerabilities' ] ) && is_array( $aData[ 'vulnerabilities' ] ) ) {
 				$aVulns = array_map(
 					function ( $aVuln ) {
 						return ( new WpVulnVO() )->applyFromArray( $aVuln );
