@@ -6,22 +6,13 @@ use FernleafSystems\ApiWrappers\WpHashes;
 
 class Retrieve extends WpHashes\Common\BaseRetrieve {
 
-	const ENDPOINT_KEY = 'plugin';
+	public const ENDPOINT_KEY = 'plugin';
 
-	/**
-	 * @param string $sSlug
-	 * @return $this
-	 */
-	public function setSlug( $sSlug ) {
-		return $this->setRequestDataItem( 'slug', strtolower( $sSlug ) );
+	public function setSlug( string $slug ) :self {
+		return $this->setRequestDataItem( 'slug', strtolower( $slug ) );
 	}
 
-	/**
-	 * @return string[]
-	 */
-	protected function getCriticalRequestItems() {
-		$aItems = parent::getCriticalRequestItems();
-		$aItems[] = 'slug';
-		return $aItems;
+	protected function getCriticalRequestItems() :array {
+		return array_merge( parent::getCriticalRequestItems(), [ 'slug' ] );
 	}
 }

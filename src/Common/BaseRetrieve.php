@@ -6,48 +6,30 @@ use FernleafSystems\ApiWrappers\WpHashes;
 
 class BaseRetrieve extends WpHashes\Api {
 
-	const ENDPOINT_KEY = '';
+	public const ENDPOINT_KEY = '';
 
-	public function __construct( $oConnection = null ) {
-		parent::__construct( $oConnection );
+	public function __construct( $connection = null ) {
+		parent::__construct( $connection );
 		$this->setType( static::ENDPOINT_KEY );
 	}
 
-	/**
-	 * @param string $sType
-	 * @return $this
-	 */
-	public function setType( $sType ) {
-		return $this->setRequestDataItem( 'type', strtolower( $sType ) );
+	public function setType( string $type ) :self {
+		return $this->setRequestDataItem( 'type', strtolower( $type ) );
 	}
 
-	/**
-	 * @param string $sHash
-	 * @return $this
-	 */
-	public function setHashAlgo( $sHash ) {
-		return $this->setRequestDataItem( 'hash', strtolower( $sHash ) );
+	public function setHashAlgo( string $hash ) :self {
+		return $this->setRequestDataItem( 'hash', strtolower( $hash ) );
 	}
 
-	/**
-	 * @param string $sVersion
-	 * @return $this
-	 */
-	public function setVersion( $sVersion ) {
-		return $this->setRequestDataItem( 'version', strtolower( $sVersion ) );
+	public function setVersion( string $version ) :self {
+		return $this->setRequestDataItem( 'version', strtolower( $version ) );
 	}
 
-	/**
-	 * @return string[]
-	 */
-	protected function getCriticalRequestItems() {
+	protected function getCriticalRequestItems() :array {
 		return [ 'type', 'version', 'hash' ];
 	}
 
-	/**
-	 * @return string
-	 */
-	protected function getUrlEndpoint() {
+	protected function getUrlEndpoint() :string {
 		return static::ENDPOINT_KEY;
 	}
 }

@@ -3,7 +3,6 @@
 namespace FernleafSystems\ApiWrappers\WpHashes\Vulnerabilities;
 
 /**
- * Class WpVulnVO
  * @property int    $id
  * @property string $title
  * @property string $vuln_type
@@ -12,16 +11,10 @@ namespace FernleafSystems\ApiWrappers\WpHashes\Vulnerabilities;
  * @property int    $updated_at
  * @property int    $created_at
  * @property int    $published_date
- * @package FernleafSystems\Wordpress\Plugin\Shield\Scans\Wpv\WpVulnDb
  */
-class WpVulnVO {
+class WpVulnVO extends \FernleafSystems\Utilities\Data\Adapter\DynPropertiesClass {
 
-	use \FernleafSystems\Utilities\Data\Adapter\StdClassAdapter;
-
-	/**
-	 * @return string
-	 */
-	public function getUrl() {
+	public function getUrl() :string {
 		return sprintf( 'https://wpvulndb.com/vulnerabilities/%s', $this->id );
 	}
 }

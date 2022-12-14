@@ -6,69 +6,52 @@ use FernleafSystems\ApiWrappers\WpHashes;
 
 abstract class BaseRetrieve extends WpHashes\Api {
 
-	const ENDPOINT_KEY = '';
+	public const ENDPOINT_KEY = '';
 
-	/**
-	 * @var RequestVO
-	 */
-	private $oReq;
+	private ?RequestVO $request;
 
-	public function __construct( $oConnection = null ) {
-		parent::__construct( $oConnection );
+	public function __construct( $connection = null ) {
+		parent::__construct( $connection );
 		$this->setType( static::ENDPOINT_KEY );
 	}
 
 	/**
 	 * @return WpVulnVO[]
 	 */
-	public function retrieve() {
-		$aVulns = [];
+	public function retrieve() :array {
+		$vulnerabilities = [];
 		if ( $this->req()->isLastRequestSuccess() ) {
-			$aData = $this->getDecodedResponseBody();
-			if ( isset( $aData[ 'vulnerabilities' ] ) && is_array( $aData[ 'vulnerabilities' ] ) ) {
-				$aVulns = array_map(
-					function ( $aVuln ) {
-						return ( new WpVulnVO() )->applyFromArray( $aVuln );
+			$data = $this->getDecodedResponseBody();
+			if ( isset( $data[ 'vulnerabilities' ] ) && is_array( $data[ 'vulnerabilities' ] ) ) {
+				$vulnerabilities = array_map(
+					function ( array $vul ) {
+						return ( new WpVulnVO() )->applyFromArray( $vul );
 					},
-					array_filter( $aData[ 'vulnerabilities' ] )
+					array_filter( $data[ 'vulnerabilities' ] )
 				);
 			}
 		}
-		return $aVulns;
+		return $vulnerabilities;
 	}
 
-	/**
-	 * @return RequestVO
-	 */
-	protected function getRequestVO() {
-		if ( !isset( $this->oReq ) ) {
-			$this->oReq = new RequestVO();
+	protected function getRequestVO() :RequestVO {
+		if ( !isset( $this->request ) ) {
+			$this->request = new RequestVO();
 		}
-		return $this->oReq;
+		return $this->request;
 	}
 
-	/**
-	 * @param string $sType
-	 * @return $this
-	 */
-	public function setType( $sType ) {
-		$this->getRequestVO()->type = $sType;
+	public function setType( string $type ) :self {
+		$this->getRequestVO()->type = $type;
 		return $this;
 	}
 
-	/**
-	 * @param string $sVersion
-	 * @return $this
-	 */
-	public function setVersion( $sVersion ) {
-		$this->getRequestVO()->version = $sVersion;
+	public function setVersion( string $version ) :self {
+		$this->getRequestVO()->version = $version;
 		return $this;
 	}
 
-	/**
-	 * @return string
-	 */
-	protected function getUrlEndpoint() {
+	protected function getUrlEndpoint() :string {
 		return sprintf( '%s/%s', 'vulnerabilities', $this->getRequestVO()->type );
 	}
 }
