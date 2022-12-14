@@ -6,22 +6,13 @@ use FernleafSystems\ApiWrappers\WpHashes;
 
 class Retrieve extends WpHashes\Common\BaseRetrieve {
 
-	const ENDPOINT_KEY = 'wordpress';
+	public const ENDPOINT_KEY = 'wordpress';
 
-	/**
-	 * @param string $sLocale
-	 * @return $this
-	 */
-	public function setLocale( $sLocale ) {
-		return $this->setRequestDataItem( 'locale', strtolower( $sLocale ) );
+	public function setLocale( string $locale ) :self {
+		return $this->setRequestDataItem( 'locale', strtolower( $locale ) );
 	}
 
-	/**
-	 * @return string[]
-	 */
-	protected function getCriticalRequestItems() {
-		$aItems = parent::getCriticalRequestItems();
-		$aItems[] = 'locale';
-		return $aItems;
+	protected function getCriticalRequestItems() :array {
+		return array_merge( parent::getCriticalRequestItems(), [ 'locale' ] );
 	}
 }
