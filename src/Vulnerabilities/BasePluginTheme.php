@@ -4,7 +4,7 @@ namespace FernleafSystems\ApiWrappers\WpHashes\Vulnerabilities;
 
 abstract class BasePluginTheme extends BaseRetrieve {
 
-	public function setSlug( string $slug ) :self {
+	public function setSlug( string $slug ) :static {
 		$this->getRequestVO()->slug = $slug;
 		return $this;
 	}

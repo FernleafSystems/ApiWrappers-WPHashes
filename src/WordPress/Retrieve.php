@@ -2,13 +2,11 @@
 
 namespace FernleafSystems\ApiWrappers\WpHashes\WordPress;
 
-use FernleafSystems\ApiWrappers\WpHashes;
-
-class Retrieve extends WpHashes\Common\BaseRetrieve {
+class Retrieve extends \FernleafSystems\ApiWrappers\WpHashes\Common\BaseRetrieve {
 
 	public const ENDPOINT_KEY = 'wordpress';
 
-	public function setLocale( string $locale ) :self {
+	public function setLocale( string $locale ) :static {
 		return $this->setRequestDataItem( 'locale', strtolower( $locale ) );
 	}
 

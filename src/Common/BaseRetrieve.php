@@ -13,15 +13,15 @@ class BaseRetrieve extends WpHashes\Api {
 		$this->setType( static::ENDPOINT_KEY );
 	}
 
-	public function setType( string $type ) :self {
+	public function setType( string $type ) :static {
 		return $this->setRequestDataItem( 'type', strtolower( $type ) );
 	}
 
-	public function setHashAlgo( string $hash ) :self {
+	public function setHashAlgo( string $hash ) :static {
 		return $this->setRequestDataItem( 'hash', strtolower( $hash ) );
 	}
 
-	public function setVersion( string $version ) :self {
+	public function setVersion( string $version ) :static {
 		return $this->setRequestDataItem( 'version', strtolower( $version ) );
 	}
 
