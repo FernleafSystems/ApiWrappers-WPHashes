@@ -2,15 +2,18 @@
 
 namespace FernleafSystems\ApiWrappers\WpHashes\Vulnerabilities;
 
-use FernleafSystems\ApiWrappers\WpHashes;
+use FernleafSystems\ApiWrappers\WpHashes\{
+	Api,
+	Connection
+};
 
-abstract class BaseRetrieve extends WpHashes\Api {
+abstract class BaseRetrieve extends Api {
 
 	public const ENDPOINT_KEY = '';
 
 	private ?RequestVO $request;
 
-	public function __construct( $connection = null ) {
+	public function __construct( ?Connection $connection = null ) {
 		parent::__construct( $connection );
 		$this->setType( static::ENDPOINT_KEY );
 	}
@@ -19,34 +22,23 @@ abstract class BaseRetrieve extends WpHashes\Api {
 	 * @return WpVulnVO[]
 	 */
 	public function retrieve() :array {
-		$vulnerabilities = [];
-		if ( $this->req()->isLastRequestSuccess() ) {
-			$data = $this->getDecodedResponseBody();
-			if ( isset( $data[ 'vulnerabilities' ] ) && is_array( $data[ 'vulnerabilities' ] ) ) {
-				$vulnerabilities = array_map(
-					function ( array $vul ) {
-						return ( new WpVulnVO() )->applyFromArray( $vul );
-					},
-					array_filter( $data[ 'vulnerabilities' ] )
-				);
-			}
-		}
-		return $vulnerabilities;
+		$req = $this->req();
+		return \array_map(
+			fn( array $vul ) => ( new WpVulnVO() )->applyFromArray( $vul ),
+			$req->isLastRequestSuccess() ? ( $this->getDecodedResponseBody()[ 'data' ][ 'vulnerabilities' ] ?? [] ) : []
+		);
 	}
 
 	protected function getRequestVO() :RequestVO {
-		if ( !isset( $this->request ) ) {
-			$this->request = new RequestVO();
-		}
-		return $this->request;
+		return $this->request ??= new RequestVO();
 	}
 
-	public function setType( string $type ) :self {
+	public function setType( string $type ) :static {
 		$this->getRequestVO()->type = $type;
 		return $this;
 	}
 
-	public function setVersion( string $version ) :self {
+	public function setVersion( string $version ) :static {
 		$this->getRequestVO()->version = $version;
 		return $this;
 	}
